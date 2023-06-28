@@ -11,10 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloWorldController {
@@ -55,5 +52,17 @@ public class HelloWorldController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    @PostMapping("/registerUser")
+    public ResponseEntity<?> registerUser(@RequestBody AuthenticationRequest authenticationRequest){
+
+        return ResponseEntity.ok(new AuthenticationResponse("jwt"));
+    }
+
+    @PostMapping("/forgetPassword")
+    public ResponseEntity<?> forgetPassword(@RequestParam("email") String email){
+
+        return ResponseEntity.ok(new AuthenticationResponse("jwt"));
     }
 }

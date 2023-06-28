@@ -1,4 +1,4 @@
 package com.example.asm3.entity;
 
-public class Patients {
+public class Patient {
 }
