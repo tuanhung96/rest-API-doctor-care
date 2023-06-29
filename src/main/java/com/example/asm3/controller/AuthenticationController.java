@@ -24,14 +24,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @RestController
-public class HelloWorldController {
+public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     private JwtTokenUtil jwtTokenUtil;
     private UserService userService;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public HelloWorldController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserService userService, PasswordEncoder passwordEncoder) {
+    public AuthenticationController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserService userService, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userService = userService;
