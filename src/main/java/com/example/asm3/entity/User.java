@@ -41,10 +41,16 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Column(name = "verification_code")
+    private String verificationCode;
+
+    @Column(name = "reset_password_code")
+    private String resetPasswordCode;
+
     public User() {
     }
 
-    public User(String name, String email, String password, String address, String phone, String avatar, String gender, String description, Role role, boolean enabled) {
+    public User(String name, String email, String password, String address, String phone, String avatar, String gender, String description, Role role, boolean enabled, String verificationCode, String resetPasswordCode) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -55,6 +61,8 @@ public class User {
         this.description = description;
         this.role = role;
         this.enabled = enabled;
+        this.verificationCode = verificationCode;
+        this.resetPasswordCode = resetPasswordCode;
     }
 
     public Integer getId() {
@@ -143,6 +151,22 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public String getResetPasswordCode() {
+        return resetPasswordCode;
+    }
+
+    public void setResetPasswordCode(String resetPasswordCode) {
+        this.resetPasswordCode = resetPasswordCode;
     }
 
     @Override

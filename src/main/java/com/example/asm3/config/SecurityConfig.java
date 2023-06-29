@@ -35,6 +35,7 @@ public class SecurityConfig {
         return auth;
     }
 
+    //passwordEncoder bean definition
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -53,6 +54,9 @@ public class SecurityConfig {
                         configurer
                                 .requestMatchers("/authenticate").permitAll()
                                 .requestMatchers("/registerUser").permitAll()
+                                .requestMatchers("/verify").permitAll()
+                                .requestMatchers("/forgetPassword").permitAll()
+                                .requestMatchers("/resetPassword").permitAll()
 //                                .requestMatchers("/employer/**").hasRole("EMPLOYER")
                                 .anyRequest().authenticated()
                 )
@@ -61,14 +65,14 @@ public class SecurityConfig {
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                                 .maximumSessions(1)
                                 .maxSessionsPreventsLogin(false)     // second login will cause the first to be invalidated
-                )
-                .exceptionHandling(exception ->
-                        exception
-                                .authenticationEntryPoint((request, response, e) -> {
-                                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,e.getMessage());
-                                }
-                        )
                 );
+//                .exceptionHandling(exception ->
+//                        exception
+//                                .authenticationEntryPoint((request, response, e) -> {
+//                                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,e.getMessage());
+//                                }
+//                        )
+//                );
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
