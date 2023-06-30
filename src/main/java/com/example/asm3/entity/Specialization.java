@@ -19,8 +19,6 @@ public class Specialization {
     @Column(name = "image")
     private String image;
 
-
-
     public Specialization() {
     }
 
