@@ -27,7 +27,7 @@ public class SpecializationServiceImpl implements SpecializationService{
         if (result.isPresent()) {
             specialization = result.get();
         } else {
-            throw new RuntimeException("Did not find company id - " + id);
+            throw new RuntimeException("Did not find specialization id - " + id);
         }
         return specialization;
     }

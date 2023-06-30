@@ -20,4 +20,10 @@ public class ScheduleServiceImpl implements ScheduleService{
     public List<Integer> getTop5SpecializationId() {
         return scheduleRepository.getTop5SpecializationId();
     }
+
+    @Override
+    @Transactional
+    public List<Integer> getTop5ClinicId() {
+        return scheduleRepository.getTop5ClinicId();
+    }
 }

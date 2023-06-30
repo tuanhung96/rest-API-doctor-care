@@ -36,6 +36,7 @@ public class SpecializationController {
         List<Integer> top5SpecializationId = scheduleService.getTop5SpecializationId();
         List<Specialization> specializations = new ArrayList<>();
         for (int i=0; i<top5SpecializationId.size();i++) {
+            System.out.println(top5SpecializationId.get(i));
             Specialization specialization = specializationService.findById(top5SpecializationId.get(i));
             specializations.add(specialization);
         }
