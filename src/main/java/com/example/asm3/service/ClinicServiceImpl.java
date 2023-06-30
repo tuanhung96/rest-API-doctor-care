@@ -3,8 +3,11 @@ package com.example.asm3.service;
 import com.example.asm3.dao.ClinicRepository;
 import com.example.asm3.entity.Clinic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +20,7 @@ public class ClinicServiceImpl implements ClinicService{
     }
 
     @Override
+    @Transactional
     public Clinic findById(Integer id) {
         Optional<Clinic> result = clinicRepository.findById(id);
         Clinic clinic = null;
@@ -28,4 +32,12 @@ public class ClinicServiceImpl implements ClinicService{
         }
         return clinic;
     }
+
+    @Override
+    @Transactional
+    public List<Clinic> findByAddress(String address) {
+        return clinicRepository.findByAddress(address, Sort.by("id"));
+    }
+
+
 }

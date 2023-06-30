@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -40,4 +41,12 @@ public class ClinicController {
         }
         return clinics;
     }
+
+    @GetMapping("")
+    public ResponseEntity<?> searchByAddress(@RequestParam("address") String address) {
+        List<Clinic> clinics = clinicService.findByAddress(address);
+
+        return ResponseEntity.ok(clinics);
+    }
+
 }

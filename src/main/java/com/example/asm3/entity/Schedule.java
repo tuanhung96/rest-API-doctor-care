@@ -32,4 +32,71 @@ public class Schedule {
     @JoinColumn(name = "specialization_id")
     private Specialization specialization;
 
+    public Schedule() {
+    }
+
+    public Schedule(String date, String time, Doctor doctor, Patient patient, Clinic clinic, Specialization specialization) {
+        this.date = date;
+        this.time = time;
+        this.doctor = doctor;
+        this.patient = patient;
+        this.clinic = clinic;
+        this.specialization = specialization;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,11 @@ public class SpecializationServiceImpl implements SpecializationService{
             throw new RuntimeException("Did not find specialization id - " + id);
         }
         return specialization;
+    }
+
+    @Override
+    @Transactional
+    public List<Specialization> findByName(String specializationName) {
+        return specializationRepository.findByName(specializationName);
     }
 }
