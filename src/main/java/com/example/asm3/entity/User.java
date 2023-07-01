@@ -19,6 +19,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "date_of_birth")
+    private String dateOfBirth;
+
     @Column(name = "address")
     private String address;
 
@@ -50,10 +53,11 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password, String address, String phone, String avatar, String gender, String description, Role role, boolean enabled, String verificationCode, String resetPasswordCode) {
+    public User(String name, String email, String password, String dateOfBirth, String address, String phone, String avatar, String gender, String description, Role role, boolean enabled, String verificationCode, String resetPasswordCode) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.phone = phone;
         this.avatar = avatar;
@@ -103,6 +107,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPhone() {
