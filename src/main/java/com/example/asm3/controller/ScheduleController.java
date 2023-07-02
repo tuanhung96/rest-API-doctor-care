@@ -37,13 +37,17 @@ public class ScheduleController {
                                          @RequestBody ScheduleRequest scheduleRequest) {
         // find Patient
         Patient patient = patientService.findByEmail(principal.getName());
+
         // if not exist, creat Patient
         if (patient == null) {
             User user = userService.findByEmail(principal.getName());
             patient = new Patient(user.getName(), user.getGender(), user.getDateOfBirth(),
                     scheduleRequest.getDescription(), user);
-            patientService.save(patient);
+        } else {
+            patient.setDescription(scheduleRequest.getDescription());
         }
+        patientService.save(patient);
+
         // creat Schedule
         Doctor doctor = doctorService.findById(doctorId);
         Schedule schedule = new Schedule(scheduleRequest.getDate(), scheduleRequest.getTime(),
