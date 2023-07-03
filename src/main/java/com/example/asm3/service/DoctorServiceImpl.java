@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DoctorServiceImpl implements DoctorService{
@@ -21,5 +22,19 @@ public class DoctorServiceImpl implements DoctorService{
     @Transactional
     public List<Doctor> findBySpecializationId(Integer id) {
         return doctorRepository.findBySpecializationId(id);
+    }
+
+    @Override
+    @Transactional
+    public Doctor findById(Integer id) {
+        Optional<Doctor> result = doctorRepository.findById(id);
+        Doctor doctor = null;
+
+        if (result.isPresent()) {
+            doctor = result.get();
+        } else {
+            throw new RuntimeException("Did not find doctor id - " + id);
+        }
+        return doctor;
     }
 }

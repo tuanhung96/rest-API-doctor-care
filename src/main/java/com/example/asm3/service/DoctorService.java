@@ -8,4 +8,6 @@ import java.util.List;
 public interface DoctorService {
 
     List<Doctor> findBySpecializationId(Integer id);
+
+    Doctor findById(Integer doctorId);
 }

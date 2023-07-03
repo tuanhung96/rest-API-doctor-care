@@ -35,12 +35,12 @@ public class ScheduleController {
     @PostMapping("/doctors/{doctorId}")
     public ResponseEntity<?> addSchedule(Principal principal, @PathVariable Integer doctorId,
                                          @RequestBody ScheduleRequest scheduleRequest) {
+        User user = userService.findByEmail(principal.getName());
         // find Patient
-        Patient patient = patientService.findByEmail(principal.getName());
+        Patient patient = patientService.findByUserId(user.getId());
 
         // if not exist, creat Patient
         if (patient == null) {
-            User user = userService.findByEmail(principal.getName());
             patient = new Patient(user.getName(), user.getGender(), user.getDateOfBirth(),
                     scheduleRequest.getDescription(), user);
         } else {
