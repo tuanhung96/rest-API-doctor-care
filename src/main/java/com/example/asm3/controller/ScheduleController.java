@@ -36,6 +36,7 @@ public class ScheduleController {
     public ResponseEntity<?> addSchedule(Principal principal, @PathVariable Integer doctorId,
                                          @RequestBody ScheduleRequest scheduleRequest) {
         User user = userService.findByEmail(principal.getName());
+
         // find Patient
         Patient patient = patientService.findByUserId(user.getId());
 
