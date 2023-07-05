@@ -40,7 +40,7 @@ public class ScheduleController {
         // find Patient
         Patient patient = patientService.findByUserId(user.getId());
 
-        // if not exist, creat Patient
+        // if Patient does not exist, creat Patient
         if (patient == null) {
             patient = new Patient(user.getName(), user.getGender(), user.getDateOfBirth(),
                     scheduleRequest.getDescription(), user);
