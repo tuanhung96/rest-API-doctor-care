@@ -54,6 +54,7 @@ public class ScheduleController {
         Schedule schedule = new Schedule(scheduleRequest.getDate(), scheduleRequest.getTime(),
                 scheduleRequest.getDescription(), doctor, patient,
                 doctor.getClinic(), doctor.getSpecialization());
+        scheduleService.save(schedule);
 
         return ResponseEntity.ok(schedule);
     }

@@ -1,6 +1,7 @@
 package com.example.asm3.service;
 
 import com.example.asm3.dao.ScheduleRepository;
+import com.example.asm3.entity.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,5 +26,11 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Transactional
     public List<Integer> getTop5ClinicId() {
         return scheduleRepository.getTop5ClinicId();
+    }
+
+    @Override
+    @Transactional
+    public void save(Schedule schedule) {
+        scheduleRepository.save(schedule);
     }
 }
