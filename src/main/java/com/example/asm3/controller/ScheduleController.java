@@ -49,7 +49,7 @@ public class ScheduleController {
         }
         patientService.save(patient);
 
-        // creat Schedule
+        // creat Schedule and save to database
         Doctor doctor = doctorService.findById(doctorId);
         Schedule schedule = new Schedule(scheduleRequest.getDate(), scheduleRequest.getTime(),
                 scheduleRequest.getDescription(), doctor, patient,
