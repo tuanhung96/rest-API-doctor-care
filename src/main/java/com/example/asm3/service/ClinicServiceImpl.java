@@ -2,6 +2,7 @@ package com.example.asm3.service;
 
 import com.example.asm3.dao.ClinicRepository;
 import com.example.asm3.entity.Clinic;
+import com.example.asm3.exception.ClinicNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ClinicServiceImpl implements ClinicService{
         if (result.isPresent()) {
             clinic = result.get();
         } else {
-            throw new RuntimeException("Did not find clinic id - " + id);
+            throw new ClinicNotFoundException("Did not find clinic id - " + id);
         }
         return clinic;
     }

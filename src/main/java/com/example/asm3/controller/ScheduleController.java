@@ -51,9 +51,6 @@ public class ScheduleController {
 
         // creat Schedule and save to database
         Doctor doctor = doctorService.findById(doctorId);
-        if(doctor == null) {
-            throw new RuntimeException("Did not find doctor id - " + doctorId);
-        }
 
         Schedule schedule = new Schedule(scheduleRequest.getDate(), scheduleRequest.getTime(),
                 scheduleRequest.getDescription(), doctor, patient,
@@ -62,4 +59,5 @@ public class ScheduleController {
 
         return ResponseEntity.ok(schedule);
     }
+
 }

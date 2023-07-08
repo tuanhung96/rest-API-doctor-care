@@ -2,6 +2,7 @@ package com.example.asm3.service;
 
 import com.example.asm3.dao.DoctorRepository;
 import com.example.asm3.entity.Doctor;
+import com.example.asm3.exception.DoctorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,7 @@ public class DoctorServiceImpl implements DoctorService{
         if (result.isPresent()) {
             doctor = result.get();
         } else {
-            throw new RuntimeException("Did not find doctor id - " + id);
+            throw new DoctorNotFoundException("Did not find doctor id - " + id);
         }
         return doctor;
     }
