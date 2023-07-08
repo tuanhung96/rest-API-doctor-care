@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -57,7 +58,11 @@ public class SecurityConfig {
                                 .requestMatchers("/verify").permitAll()
                                 .requestMatchers("/forgetPassword").permitAll()
                                 .requestMatchers("/resetPassword").permitAll()
-//                                .requestMatchers("/employer/**").hasRole("EMPLOYER")
+                                .requestMatchers("/patients/**").hasRole("DOCTOR")
+                                .requestMatchers("/schedules/accept/**").hasRole("DOCTOR")
+                                .requestMatchers("/schedules/cancel/**").hasRole("DOCTOR")
+                                .requestMatchers("/users/disable/**").hasRole("ADMIN")
+                                .requestMatchers("/users/enable/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->

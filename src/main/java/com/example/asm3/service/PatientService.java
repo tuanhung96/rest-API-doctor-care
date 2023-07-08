@@ -6,4 +6,6 @@ public interface PatientService {
     Patient findByUserId(Integer id);
 
     void save(Patient patient);
+
+    Patient findById(Integer patientId);
 }

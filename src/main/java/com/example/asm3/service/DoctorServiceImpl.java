@@ -38,4 +38,10 @@ public class DoctorServiceImpl implements DoctorService{
         }
         return doctor;
     }
+
+    @Override
+    @Transactional
+    public Doctor findByUserId(Integer id) {
+        return doctorRepository.findByUserId(id);
+    }
 }

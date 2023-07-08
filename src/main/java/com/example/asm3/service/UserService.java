@@ -20,4 +20,6 @@ public interface UserService extends UserDetailsService {
     User findByResetPasswordCode(String code);
 
     User findByVerificationCode(String code);
+
+    User findById(Integer id);
 }

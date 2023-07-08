@@ -10,4 +10,6 @@ public interface DoctorService {
     List<Doctor> findBySpecializationId(Integer id);
 
     Doctor findById(Integer doctorId);
+
+    Doctor findByUserId(Integer id);
 }

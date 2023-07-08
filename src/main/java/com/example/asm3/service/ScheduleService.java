@@ -10,4 +10,10 @@ public interface ScheduleService {
     List<Integer> getTop5ClinicId();
 
     void save(Schedule schedule);
+
+    List<Integer> findByDoctorId(Integer id);
+
+    List<Schedule> findScheduleByDoctorId(Integer id);
+
+    Schedule findById(Integer scheduleId);
 }

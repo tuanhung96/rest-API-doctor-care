@@ -19,6 +19,9 @@ public class Schedule {
     @Column(name = "reason")
     private String reason;
 
+    @Column(name = "status")
+    private Integer status;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
@@ -27,21 +30,22 @@ public class Schedule {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "specialization_id")
     private Specialization specialization;
 
     public Schedule() {
     }
 
-    public Schedule(String date, String time, String reason, Doctor doctor, Patient patient, Clinic clinic, Specialization specialization) {
+    public Schedule(String date, String time, String reason, Integer status, Doctor doctor, Patient patient, Clinic clinic, Specialization specialization) {
         this.date = date;
         this.time = time;
         this.reason = reason;
+        this.status = status;
         this.doctor = doctor;
         this.patient = patient;
         this.clinic = clinic;
@@ -78,6 +82,14 @@ public class Schedule {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Doctor getDoctor() {

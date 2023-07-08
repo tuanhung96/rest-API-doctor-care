@@ -1,7 +1,10 @@
 package com.example.asm3.service;
 
 import com.example.asm3.dao.UserRepository;
+import com.example.asm3.entity.Doctor;
 import com.example.asm3.entity.User;
+import com.example.asm3.exception.DoctorNotFoundException;
+import com.example.asm3.exception.UserNotFoundException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -76,6 +80,20 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public User findByVerificationCode(String code) {
         return userRepository.findByVerificationCode(code);
+    }
+
+    @Override
+    @Transactional
+    public User findById(Integer id) {
+        Optional<User> result = userRepository.findById(id);
+        User user = null;
+
+        if (result.isPresent()) {
+            user = result.get();
+        } else {
+            throw new UserNotFoundException("Did not find user id - " + id);
+        }
+        return user;
     }
 
     @Override

@@ -10,10 +10,12 @@ import com.example.asm3.service.PatientService;
 import com.example.asm3.service.ScheduleService;
 import com.example.asm3.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/schedules")
@@ -53,11 +55,47 @@ public class ScheduleController {
         Doctor doctor = doctorService.findById(doctorId);
 
         Schedule schedule = new Schedule(scheduleRequest.getDate(), scheduleRequest.getTime(),
-                scheduleRequest.getDescription(), doctor, patient,
+                scheduleRequest.getDescription(), 0, doctor, patient,
                 doctor.getClinic(), doctor.getSpecialization());
         scheduleService.save(schedule);
 
         return ResponseEntity.ok(schedule);
     }
+
+    @GetMapping()
+    public ResponseEntity<?> getSchedule(Principal principal) {
+        User user = userService.findByEmail(principal.getName());
+        Doctor doctor = doctorService.findByUserId(user.getId());
+        List<Schedule> scheduleList = scheduleService.findScheduleByDoctorId(doctor.getId());
+        return ResponseEntity.ok(scheduleList);
+    }
+
+    @GetMapping("/accept/{scheduleId}")
+    public ResponseEntity<?> acceptSchedule(@PathVariable Integer scheduleId, Principal principal) {
+        User user = userService.findByEmail(principal.getName());
+        Doctor doctor = doctorService.findByUserId(user.getId());
+        Schedule schedule = scheduleService.findById(scheduleId);
+        if(schedule.getDoctor().getId()!=doctor.getId()) return new ResponseEntity<>("Bạn không có lịch khám này!", HttpStatus.BAD_REQUEST);
+        schedule.setStatus(1);
+        scheduleService.save(schedule);
+        return ResponseEntity.ok(schedule);
+    }
+
+    @GetMapping("/cancel/{scheduleId}")
+    public ResponseEntity<?> cancelSchedule(@PathVariable Integer scheduleId, Principal principal) {
+        User user = userService.findByEmail(principal.getName());
+        Doctor doctor = doctorService.findByUserId(user.getId());
+        Schedule schedule = scheduleService.findById(scheduleId);
+        if(schedule.getDoctor().getId()!=doctor.getId()) return new ResponseEntity<>("Bạn không có lịch khám này!", HttpStatus.BAD_REQUEST);
+        schedule.setStatus(2);
+        scheduleService.save(schedule);
+        return ResponseEntity.ok(schedule);
+    }
+
+//    @PutMapping()
+//    public ResponseEntity<?> updateSchedule(@RequestBody Schedule schedule) {
+//        scheduleService.save(schedule);
+//        return ResponseEntity.ok(schedule);
+//    }
 
 }
