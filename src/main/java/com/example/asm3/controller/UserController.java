@@ -2,13 +2,11 @@ package com.example.asm3.controller;
 
 import com.example.asm3.entity.Doctor;
 import com.example.asm3.entity.Patient;
-import com.example.asm3.entity.Schedule;
 import com.example.asm3.entity.User;
 import com.example.asm3.service.DoctorService;
 import com.example.asm3.service.PatientService;
 import com.example.asm3.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
