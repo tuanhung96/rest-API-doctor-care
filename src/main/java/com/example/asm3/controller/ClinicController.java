@@ -42,7 +42,7 @@ public class ClinicController {
         return clinics;
     }
 
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<?> searchByAddress(@RequestParam("address") String address) {
         List<Clinic> clinics = clinicService.findByAddress(address);
 

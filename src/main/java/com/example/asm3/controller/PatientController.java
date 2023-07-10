@@ -33,6 +33,7 @@ public class PatientController {
         this.scheduleService = scheduleService;
     }
 
+    // Doctor get patient list
     @GetMapping
     public ResponseEntity<?> getPatients(Principal principal) {
         User user = userService.findByEmail(principal.getName());
