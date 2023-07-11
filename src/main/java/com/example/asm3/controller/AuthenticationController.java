@@ -1,5 +1,7 @@
 package com.example.asm3.controller;
 
+import com.example.asm3.exception.InvalidUserException;
+import com.example.asm3.exception.UserDisabledException;
 import com.example.asm3.model.ResetPasswordRequest;
 import com.example.asm3.model.UserDTO;
 import com.example.asm3.entity.User;
@@ -38,13 +40,8 @@ public class AuthenticationController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/hello" )
-    public String hello() {
-        return "Hello World";
-    }
-
     @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
@@ -56,13 +53,13 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    private void authenticate(String username, String password) throws Exception {
+    private void authenticate(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new UserDisabledException("USER_DISABLED");
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new InvalidUserException("INVALID_CREDENTIALS");
         }
     }
 
