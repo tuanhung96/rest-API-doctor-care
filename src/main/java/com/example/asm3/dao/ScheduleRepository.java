@@ -20,4 +20,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
 
     @Query("SELECT s FROM Schedule s WHERE s.doctor.id = ?1")
     List<Schedule> findScheduleByDoctorId(Integer id);
+
+    @Query("SELECT s FROM Schedule s WHERE s.patient.id = ?1")
+    List<Schedule> findByPatientId(Integer patientId);
 }

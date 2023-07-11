@@ -16,4 +16,6 @@ public interface ScheduleService {
     List<Schedule> findScheduleByDoctorId(Integer id);
 
     Schedule findById(Integer scheduleId);
+
+    List<Schedule> findByPatientId(Integer patientId);
 }

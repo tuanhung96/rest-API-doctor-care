@@ -61,8 +61,11 @@ public class SecurityConfig {
                                 .requestMatchers("/patients/**").hasRole("DOCTOR")
                                 .requestMatchers("/schedules/accept/**").hasRole("DOCTOR")
                                 .requestMatchers("/schedules/cancel/**").hasRole("DOCTOR")
+                                .requestMatchers("/doctors/email/**").hasRole("DOCTOR")
                                 .requestMatchers("/users/disable/**").hasRole("ADMIN")
                                 .requestMatchers("/users/enable/**").hasRole("ADMIN")
+                                .requestMatchers("/schedules/patients/**").hasRole("ADMIN")
+                                .requestMatchers("/schedules/doctors/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->

@@ -98,4 +98,18 @@ public class ScheduleController {
 //        return ResponseEntity.ok(schedule);
 //    }
 
+    @GetMapping("patients/{patientId}")
+    public ResponseEntity<?> getScheduleOfPatient(@PathVariable Integer patientId) {
+        List<Schedule> schedules = scheduleService.findByPatientId(patientId);
+        if(schedules.isEmpty()) return new ResponseEntity<>("Not found any schedule with patientId " + patientId, HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(schedules);
+    }
+
+    @GetMapping("doctors/{doctorId}")
+    public ResponseEntity<?> getScheduleOfDoctor(@PathVariable Integer doctorId) {
+        List<Schedule> schedules = scheduleService.findScheduleByDoctorId(doctorId);
+        if(schedules.isEmpty()) return new ResponseEntity<>("Not found any schedule with doctorId " + doctorId, HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(schedules);
+    }
+
 }

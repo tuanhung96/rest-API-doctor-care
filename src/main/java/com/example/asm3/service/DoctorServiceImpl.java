@@ -2,21 +2,29 @@ package com.example.asm3.service;
 
 import com.example.asm3.dao.DoctorRepository;
 import com.example.asm3.entity.Doctor;
+import com.example.asm3.entity.Patient;
 import com.example.asm3.exception.DoctorNotFoundException;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class DoctorServiceImpl implements DoctorService{
     private DoctorRepository doctorRepository;
+    private JavaMailSender mailSender;
 
     @Autowired
-    public DoctorServiceImpl(DoctorRepository doctorRepository) {
+    public DoctorServiceImpl(DoctorRepository doctorRepository, JavaMailSender mailSender) {
         this.doctorRepository = doctorRepository;
+        this.mailSender = mailSender;
     }
 
     @Override
@@ -43,5 +51,34 @@ public class DoctorServiceImpl implements DoctorService{
     @Transactional
     public Doctor findByUserId(Integer id) {
         return doctorRepository.findByUserId(id);
+    }
+
+    @Override
+    @Transactional
+    public void save(Doctor doctor) {
+        doctorRepository.save(doctor);
+    }
+
+    @Override
+    public void sendEmailToPatient(Doctor doctor, Patient patient) throws MessagingException, UnsupportedEncodingException {
+        String fromAddress = doctor.getUser().getEmail();
+        String senderName = "Doctor Care";
+        String toAddress = patient.getUser().getEmail();
+        String subject = "Thông tin khám chữa bệnh";
+
+        String content = "Dear " + patient.getUser().getName() + ",<br>"
+                + "Dưới đây là thông tin khám chữa bệnh của bạn:<br>"
+                + "Tình trạng: "+ patient.getDescription() +"<br>"
+                + "Bác sĩ " + doctor.getUser().getName() + "<br>"
+                + "Doctor Care";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        mailSender.send(message);
     }
 }

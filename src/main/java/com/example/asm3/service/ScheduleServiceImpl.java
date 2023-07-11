@@ -63,4 +63,10 @@ public class ScheduleServiceImpl implements ScheduleService{
         }
         return schedule;
     }
+
+    @Override
+    @Transactional
+    public List<Schedule> findByPatientId(Integer patientId) {
+        return scheduleRepository.findByPatientId(patientId);
+    }
 }

@@ -1,9 +1,7 @@
 package com.example.asm3.service;
 
 import com.example.asm3.dao.UserRepository;
-import com.example.asm3.entity.Doctor;
 import com.example.asm3.entity.User;
-import com.example.asm3.exception.DoctorNotFoundException;
 import com.example.asm3.exception.UserNotFoundException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -97,7 +95,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Transactional
     public void sendResetPasswordEmail(User user, String siteURL) throws MessagingException, UnsupportedEncodingException{
         String fromAddress = "tuanhung.hn96@gmail.com";
         String senderName = "Doctor Care";

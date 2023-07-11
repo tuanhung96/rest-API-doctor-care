@@ -69,8 +69,6 @@ public class AuthenticationController {
     @PostMapping("/registerUser")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
 
-        System.out.println(userDTO);
-        System.out.println(userDTO.getRePassword());
         // check password
         if (!userDTO.getPassword().equals(userDTO.getRePassword())) {
             return new ResponseEntity<>("Password is not equal", HttpStatus.BAD_REQUEST);
