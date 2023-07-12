@@ -109,12 +109,12 @@ public class AuthenticationController {
     }
 
     @GetMapping("/forgetPassword")
-    public ResponseEntity<?> forgetPassword(@RequestParam("email") String email, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public ResponseEntity<?> forgetPassword(@RequestParam("email") String email,
+                                            HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         User user = userService.findByEmail(email);
-        if (user==null) {
-            return new ResponseEntity<>("Email is not found", HttpStatus.NOT_FOUND);
-        }
+        if (user==null) return new ResponseEntity<>("Email is not found", HttpStatus.NOT_FOUND);
 
+        // create resetPassword code for user and save to database
         String randomCode = UUID.randomUUID().toString();
         user.setResetPasswordCode(randomCode);
         userService.saveUser(user);
@@ -128,11 +128,12 @@ public class AuthenticationController {
     public String resetPassword(@RequestParam("code") String code, @RequestBody ResetPasswordRequest resetPasswordRequest) {
         User user = userService.findByResetPasswordCode(code);
         if (user == null) {
-            return "reset password fail";
+            return "Reset password fail";
         } else {
             if (!resetPasswordRequest.getNewPassword().equals(resetPasswordRequest.getRePassword())) {
                 return "Password is not equal";
             }
+            // set new password for user
             String newPassword = passwordEncoder.encode(resetPasswordRequest.getNewPassword());
             user.setPassword(newPassword);
             user.setResetPasswordCode(null);
