@@ -130,6 +130,7 @@ public class AuthenticationController {
         if (user == null) {
             return "Reset password fail";
         } else {
+            // check if new password and rePassword are equal
             if (!resetPasswordRequest.getNewPassword().equals(resetPasswordRequest.getRePassword())) {
                 return "Password is not equal";
             }
