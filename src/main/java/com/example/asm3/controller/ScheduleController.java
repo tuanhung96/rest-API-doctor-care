@@ -34,6 +34,7 @@ public class ScheduleController {
         this.userService = userService;
     }
 
+    // Patient set schedule with doctor
     @PostMapping("/doctors/{doctorId}")
     public ResponseEntity<?> addSchedule(Principal principal, @PathVariable Integer doctorId,
                                          @RequestBody ScheduleRequest scheduleRequest) {

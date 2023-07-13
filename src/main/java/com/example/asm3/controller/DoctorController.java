@@ -43,7 +43,6 @@ public class DoctorController {
         List<Specialization> specializations = specializationService.findByName(specializationName);
         List<Doctor> doctors = new ArrayList<>();
         for (Specialization specialization: specializations) {
-            System.out.println(specialization.getId());
             List<Doctor> doctorList = doctorService.findBySpecializationId(specialization.getId());
             doctors.addAll(doctorList);
         }
@@ -51,6 +50,7 @@ public class DoctorController {
         return ResponseEntity.ok(doctors);
     }
 
+    // doctor send email to patient
     @GetMapping("/email/patients/{patientId}")
     public ResponseEntity<?> sendEmailToPatient(@PathVariable Integer patientId, Principal principal) throws MessagingException, UnsupportedEncodingException {
         User user = userService.findByEmail(principal.getName());

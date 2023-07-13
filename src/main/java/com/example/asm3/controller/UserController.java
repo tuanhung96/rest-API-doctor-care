@@ -41,6 +41,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    // admin disable doctor account
     @GetMapping("/disable/doctors/{doctorId}")
     public ResponseEntity<?> disableDoctor(@PathVariable Integer doctorId) {
         Doctor doctor = doctorService.findById(doctorId);
@@ -50,6 +51,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    // admin enable doctor account
     @GetMapping("/enable/doctors/{doctorId}")
     public ResponseEntity<?> enableDoctor(@PathVariable Integer doctorId) {
         Doctor doctor = doctorService.findById(doctorId);
@@ -59,6 +61,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    // admin disable patient account
     @GetMapping("/disable/patients/{patientId}")
     public ResponseEntity<?> disablePatient(@PathVariable Integer patientId) {
         Patient patient = patientService.findById(patientId);
@@ -68,6 +71,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    // admin enable doctor account
     @GetMapping("/enable/patients/{patientId}")
     public ResponseEntity<?> enablePatient(@PathVariable Integer patientId) {
         Patient patient = patientService.findById(patientId);

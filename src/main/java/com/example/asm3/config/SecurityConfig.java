@@ -4,6 +4,7 @@ import com.example.asm3.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -56,14 +57,16 @@ public class SecurityConfig {
                                 .requestMatchers("/verify").permitAll()
                                 .requestMatchers("/forgetPassword").permitAll()
                                 .requestMatchers("/resetPassword").permitAll()
-                                .requestMatchers("/patients/**").hasRole("DOCTOR")
-                                .requestMatchers("/schedules/accept/**").hasRole("DOCTOR")
-                                .requestMatchers("/schedules/cancel/**").hasRole("DOCTOR")
-                                .requestMatchers("/doctors/email/**").hasRole("DOCTOR")
-                                .requestMatchers("/users/disable/**").hasRole("ADMIN")
-                                .requestMatchers("/users/enable/**").hasRole("ADMIN")
-                                .requestMatchers("/schedules/patients/**").hasRole("ADMIN")
-                                .requestMatchers("/schedules/doctors/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST,"/schedules/doctors/**").hasRole("PATIENT")
+                                .requestMatchers(HttpMethod.GET,"/patients/**").hasRole("DOCTOR")
+                                .requestMatchers(HttpMethod.GET,"/schedules/accept/**").hasRole("DOCTOR")
+                                .requestMatchers(HttpMethod.GET,"/schedules/cancel/**").hasRole("DOCTOR")
+                                .requestMatchers(HttpMethod.GET,"/doctors/email/**").hasRole("DOCTOR")
+                                .requestMatchers(HttpMethod.GET,"/users/disable/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/users/enable/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST,"/users").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/schedules/patients/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/schedules/doctors/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
