@@ -84,9 +84,7 @@ public class UserController {
     @PostMapping()
     public ResponseEntity<?> addDoctor(@RequestBody DoctorDTO doctorDTO, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         // check the database if user already exists
-        if (userService.userExists(doctorDTO.getEmail())) {
-            return new ResponseEntity<>("Email existed", HttpStatus.BAD_REQUEST);
-        }
+        if (userService.userExists(doctorDTO.getEmail())) return new ResponseEntity<>("Email existed", HttpStatus.BAD_REQUEST);
 
         // create new user
         User user = doctorDTO.convertToUser();
