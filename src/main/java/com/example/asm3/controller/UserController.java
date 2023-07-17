@@ -97,6 +97,7 @@ public class UserController {
         user.setEnabled(false);
         userService.saveUser(user);
 
+        // get site URL (http:localhost:8080)
         String siteURL = request.getRequestURL().toString().replace(request.getServletPath(), "");
         userService.sendVerificationEmail(user, siteURL);
 
