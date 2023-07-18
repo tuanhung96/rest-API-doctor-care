@@ -33,6 +33,7 @@ public class SpecializationController {
     }
 
     public List<Specialization> getTop5Specialization() {
+        // find top 5 specializations that have been scheduled most
         List<Integer> top5SpecializationId = scheduleService.getTop5SpecializationId();
         List<Specialization> specializations = new ArrayList<>();
         for (int i=0; i<top5SpecializationId.size();i++) {
