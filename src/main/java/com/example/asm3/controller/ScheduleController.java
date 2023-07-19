@@ -47,7 +47,7 @@ public class ScheduleController {
         if (patient == null) {
             patient = new Patient(user.getName(), user.getGender(), user.getDateOfBirth(),
                     scheduleRequest.getDescription(), user);
-        } else {
+        } else { // if patient existed, set Description
             patient.setDescription(scheduleRequest.getDescription());
         }
         patientService.save(patient);
