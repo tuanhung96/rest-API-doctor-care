@@ -77,7 +77,7 @@ public class ScheduleController {
         Doctor doctor = doctorService.findByUserId(user.getId());
         Schedule schedule = scheduleService.findById(scheduleId);
         if(schedule.getDoctor().getId()!=doctor.getId()) return new ResponseEntity<>("Bạn không có lịch khám này!", HttpStatus.BAD_REQUEST);
-        schedule.setStatus(1);
+        schedule.setStatus(1); // status = 1 : accepted
         scheduleService.save(schedule);
         return ResponseEntity.ok(schedule);
     }
