@@ -71,6 +71,7 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleList);
     }
 
+    // Doctor accept schedule with patient
     @GetMapping("/accept/{scheduleId}")
     public ResponseEntity<?> acceptSchedule(@PathVariable Integer scheduleId, Principal principal) {
         User user = userService.findByEmail(principal.getName());
