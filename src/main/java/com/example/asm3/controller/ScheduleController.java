@@ -63,6 +63,7 @@ public class ScheduleController {
         return ResponseEntity.ok(schedule);
     }
 
+    // Doctor get all Schedules
     @GetMapping()
     public ResponseEntity<?> getSchedule(Principal principal) {
         User user = userService.findByEmail(principal.getName());
