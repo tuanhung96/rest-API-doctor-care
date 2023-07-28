@@ -72,7 +72,7 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleList);
     }
 
-    // Doctor accept schedule with patient
+    // Doctor accept schedule with Patient
     @GetMapping("/accept/{scheduleId}")
     public ResponseEntity<?> acceptSchedule(@PathVariable Integer scheduleId, Principal principal) {
         User user = userService.findByEmail(principal.getName());
@@ -84,7 +84,7 @@ public class ScheduleController {
         return ResponseEntity.ok(schedule);
     }
 
-    // Doctor cancel schedule with patient
+    // Doctor cancel schedule with Patient
     @GetMapping("/cancel/{scheduleId}")
     public ResponseEntity<?> cancelSchedule(@PathVariable Integer scheduleId, Principal principal) {
         User user = userService.findByEmail(principal.getName());
