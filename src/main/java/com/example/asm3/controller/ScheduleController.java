@@ -84,6 +84,7 @@ public class ScheduleController {
         return ResponseEntity.ok(schedule);
     }
 
+    // Doctor cancel schedule with patient
     @GetMapping("/cancel/{scheduleId}")
     public ResponseEntity<?> cancelSchedule(@PathVariable Integer scheduleId, Principal principal) {
         User user = userService.findByEmail(principal.getName());
